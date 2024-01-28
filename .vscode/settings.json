@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "driverlib.h": "c",
+        "led.h": "c",
+        "assert.h": "c",
+        "hw_memmap.h": "c",
+        "msp430fr5xx_6xxgeneric.h": "c",
+        "stdlib.h": "c"
+    }
+}
