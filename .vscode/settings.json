@@ -5,6 +5,13 @@
         "assert.h": "c",
         "hw_memmap.h": "c",
         "msp430fr5xx_6xxgeneric.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "freertos.h": "c",
+        "msp430x44x.h": "c",
+        "msp430.h": "c",
+        "signal.h": "c",
+        "cdefs.h": "c",
+        "task.h": "c",
+        "portmacro.h": "c"
     }
 }

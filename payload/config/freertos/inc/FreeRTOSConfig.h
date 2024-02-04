@@ -27,7 +27,8 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
-#include <msp430x44x.h>
+// #include "msp430fr5xx_6xxgeneric.h"
+// #include "task.h"
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -41,35 +42,45 @@
  * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION		1
-#define configUSE_IDLE_HOOK			1
-#define configUSE_TICK_HOOK			0
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 7995392 ) /* Clock setup from main.c in the demo application. */
-#define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
-#define configMAX_PRIORITIES		( 4 )
-#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 50 )
-#define configTOTAL_HEAP_SIZE		( ( size_t ) ( 1800 ) )
-#define configMAX_TASK_NAME_LEN		( 8 )
-#define configUSE_TRACE_FACILITY	0
-#define configUSE_16_BIT_TICKS		1
-#define configIDLE_SHOULD_YIELD		1
-
+#define configUSE_PREEMPTION 1
+#define configUSE_IDLE_HOOK 0
+#define configUSE_TICK_HOOK 0
+#define configCPU_CLOCK_HZ ((unsigned long)7995392) /* Clock setup from main.c in the demo application. */
+#define configTICK_RATE_HZ ((TickType_t)1000)
+#define configMAX_PRIORITIES (4)
+#define configMINIMAL_STACK_SIZE ((unsigned short)120)
+#define configTOTAL_HEAP_SIZE ((size_t)(1800))
+#define configMAX_TASK_NAME_LEN (8)
+#define configUSE_TRACE_FACILITY 0
+#define configUSE_16_BIT_TICKS 1
+#define configIDLE_SHOULD_YIELD 1
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
 
-#define INCLUDE_vTaskPrioritySet		0
-#define INCLUDE_uxTaskPriorityGet		0
-#define INCLUDE_vTaskDelete				1
-#define INCLUDE_vTaskCleanUpResources	0
-#define INCLUDE_vTaskSuspend			0
-#define INCLUDE_vTaskDelayUntil			1
-#define INCLUDE_vTaskDelay				1
+#define INCLUDE_vTaskPrioritySet 0
+#define INCLUDE_uxTaskPriorityGet 0
+#define INCLUDE_vTaskDelete 0
+#define INCLUDE_vTaskCleanUpResources 0
+#define INCLUDE_vTaskSuspend 0
+#define INCLUDE_vTaskDelayUntil 1
+#define INCLUDE_vTaskDelay 1
 
-
-
-
-
-
+/* The MSP430X port uses a callback function to configure its tick interrupt.
+This allows the application to choose the tick interrupt source.
+configTICK_VECTOR must also be set in FreeRTOSConfig.h to the correct interrupt
+vector for the chosen tick interrupt source.  This implementation of
+vApplicationSetupTimerInterrupt() generates the tick from timer A0, so in this
+case configTICK_VECTOR is set to TIMER0_A0_VECTOR. */
+#define configTICK_VECTOR TIMER0_A0_VECTOR
+#define configASSERT(x)           \
+    if ((x) == 0)                 \
+    {                             \
+        taskDISABLE_INTERRUPTS(); \
+        for (;;)                  \
+            ;                     \
+    }
+#define configDELAY_MS(x) vTaskDelay(x)
+#define configDEFAULT_TASK_PRIO (tskIDLE_PRIORITY + 1)
 
 #endif /* FREERTOS_CONFIG_H */

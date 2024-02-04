@@ -8,7 +8,7 @@ set(FREERTOS_CONFIG_FILE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/config/freertos/in
 # Heap number or absolute path to custom heap implementation provided by user
 set(FREERTOS_HEAP "4" CACHE STRING "FreeRTOS heap model number. 1 .. 5. Or absolute path to custom heap source file")
 # FreeRTOS port option
-set(FREERTOS_PORT "GCC_MSP430F449" CACHE STRING "FreeRTOS port name")
+set(FREERTOS_PORT "GCC_MSP430FR5994" CACHE STRING "FreeRTOS port name")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
@@ -19,6 +19,7 @@ set(CMAKE_EXE_LINKER_FLAGS
 
 add_executable(${ELF_FILE}
     ${CMAKE_CURRENT_LIST_DIR}/main.c
+    ${CMAKE_CURRENT_LIST_DIR}/config/freertos/src/FreeRTOSConfig.c
 )
 
 include_directories(${ELF_FILE} PRIVATE
@@ -33,4 +34,4 @@ add_subdirectory(middleware/freertos)
 
 target_link_libraries(${ELF_FILE} led dbg_print driverlib freertos_kernel)
 
-msp430_add_executable_upload(${EXECUTABLE})
+msp430_add_executable_upload(${ELF_FILE})

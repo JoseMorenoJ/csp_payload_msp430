@@ -9,8 +9,6 @@ cmake_minimum_required(VERSION 3.15)
 # option FREERTOS_HEAP. If the option is not set, the cmake will default to
 # using heap_4.c.
 
-message(STATUS "**** ${FREERTOS_CONFIG_FILE_DIRECTORY}")
-
 if(NOT FREERTOS_CONFIG_FILE_DIRECTORY)
     message(FATAL_ERROR " FreeRTOSConfig.h file directory not specified. Please specify absolute path to it from top-level CMake file:\n"
         "  set(FREERTOS_CONFIG_FILE_DIRECTORY <absolute path to FreeRTOSConfig.h directory> CACHE STRING \"\")\n"

@@ -18,6 +18,10 @@ If you need to update the driverlib or if you need to add the driverlib for anot
 
 I tried to run the cmake using `include msp430-toolchain.cmake` inside the CMakeListst.txt but it does not import the variables properly.
 
+## Limitations
+
+- Only small data model is used now. If you need the large data model you will need to add some definitions in FreeRTOS.
+
 # Projects
 
 1) *Blinky*: Simple Blinky program

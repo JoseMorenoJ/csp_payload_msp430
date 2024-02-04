@@ -4,8 +4,8 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR msp430)
 
 set(DEVICE "msp430fr5994" CACHE STRING "")
-string(TOUPPER ${DEVICE} DEVICE_DEFINE)
-set(DEVICE_DEFINE "__${DEVICE_DEFINE}__")
+# string(TOUPPER ${DEVICE} DEVICE_DEFINE)
+# set(DEVICE_DEFINE "__${DEVICE_DEFINE}__")
 
 # MSP430 support files (installation dependent --> ADJUST ACCORDINGLY)
 set(PATH_MSP430_SUPPORT "C:/ti/msp430-gcc/include" CACHE STRING "")
@@ -15,7 +15,7 @@ set(PATH_MSP430_INCLUDE "C:/ti/msp430-gcc/lib/gcc/msp430-elf/9.3.1/include" CACH
 
 
 # MSP430 Debug path (installation dependent--> ADJUST ACCORDINGLY)
-set(MSPDEBUG "C:/ti/mspdebug/mspdebug.exe" CACHE STRING "")
+set(MSPDEBUG "C:/ti/msp430-gdbproxy/msp430-gdbproxy.exe" CACHE STRING "")
 
 # Device specific driverlib
 set(PATH_MSP430_DRIVERS "${CMAKE_CURRENT_LIST_DIR}/MSP430FR5xx_6xx" CACHE STRING "")
@@ -43,7 +43,7 @@ set(CMAKE_FIND_ROOT_PATH  "")
 set(COMMON_FLAGS "-gdwarf-3 -gstrict-dwarf -I${PATH_MSP430_SUPPORT} -I${PATH_MSP430_LIB} -I${PATH_MSP430_DRIVERS} -I${PATH_MSP430_INCLUDE}" CACHE STRING "")
 
 #set(MCU_SPECIFIC_CFLAGS "-mmcu=msp430fr5994 -mhwmult=f5series -mcode-region=none -mdata-region=none -mlarge" CACHE STRING "")
-set(MCU_SPECIFIC_CFLAGS "-MD -mhwmult=f5series -mmcu=${DEVICE} -D${DEVICE_DEFINE} -msmall -lm" CACHE STRING "")
+set(MCU_SPECIFIC_CFLAGS "-MD -mhwmult=f5series -mmcu=${DEVICE} -msmall -lm" CACHE STRING "")
 
 set(CMAKE_C_FLAGS "${MCU_SPECIFIC_CFLAGS} ${COMMON_FLAGS}" CACHE STRING "")
 
@@ -58,6 +58,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 # This will generate an executable that calls mspdebug tool to upload the firmware and start a debug session
 function(msp430_add_executable_upload ${EXECUTABLE})
 	add_custom_target(upload_${EXECUTABLE}
-    	COMMAND ${MSPDEBUG} tilib "prog ../${EXECUTABLE}.elf"
+    	COMMAND ${MSPDEBUG} tilib "prog ${EXECUTABLE}.elf"
 		DEPENDS ${EXECUTABLE}.elf)
 endfunction(msp430_add_executable_upload)

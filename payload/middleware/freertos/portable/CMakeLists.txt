@@ -250,8 +250,8 @@ add_library(freertos_kernel_port STATIC
         GCC/PPC440_Xilinx/portasm.S>
 
      # Texas Instruments MSP430 port for GCC
-    $<$<STREQUAL:${FREERTOS_PORT},GCC_MSP430F449>:
-        GCC/MSP430F449/port.c>
+    $<$<STREQUAL:${FREERTOS_PORT},GCC_MSP430FR5994>:
+        gcc/msp430fr5994/port.c>
 
     # Intel (formerly Altera) NIOS II soft core port for GCC
     $<$<STREQUAL:${FREERTOS_PORT},GCC_NIOSII>:
@@ -779,7 +779,7 @@ target_include_directories(freertos_kernel_port PUBLIC
     $<$<STREQUAL:${FREERTOS_PORT},GCC_NIOSII>:${CMAKE_CURRENT_LIST_DIR}/GCC/NiosII>
 
     # Texas Instruments MSP430 port for GCC
-    $<$<STREQUAL:${FREERTOS_PORT},GCC_MSP430F449>:${CMAKE_CURRENT_LIST_DIR}/GCC/MSP430F449>
+    $<$<STREQUAL:${FREERTOS_PORT},GCC_MSP430FR5994>:${CMAKE_CURRENT_LIST_DIR}/gcc/msp430fr5994>
 
     # Xilinx MicroBlaze soft core ports for GCC
     $<$<STREQUAL:${FREERTOS_PORT},GCC_MICROBLAZE>:${CMAKE_CURRENT_LIST_DIR}/GCC/MicroBlaze>
