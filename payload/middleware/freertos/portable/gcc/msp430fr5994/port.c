@@ -80,23 +80,23 @@ volatile uint16_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
  * pointer value is saved into the task control block so it can be retrieved
  * the next time the task executes.
  */
-#define portSAVE_CONTEXT()                            \
-    asm volatile("push  r4                      \n\t" \
-                 "push  r5                      \n\t" \
-                 "push  r6                      \n\t" \
-                 "push  r7                      \n\t" \
-                 "push  r8                      \n\t" \
-                 "push  r9                      \n\t" \
-                 "push  r10                     \n\t" \
-                 "push  r11                     \n\t" \
-                 "push  r12                     \n\t" \
-                 "push  r13                     \n\t" \
-                 "push  r14                     \n\t" \
-                 "push  r15                     \n\t" \
-                 "mov.w usCriticalNesting, r14  \n\t" \
-                 "push  r14                     \n\t" \
-                 "mov.w pxCurrentTCB, r12       \n\t" \
-                 "mov.w r1, @r12                \n\t");
+#define portSAVE_CONTEXT()                             \
+    asm volatile("push.a  r4                     \n\t" \
+                 "push.a  r5                     \n\t" \
+                 "push.a  r6                     \n\t" \
+                 "push.a  r7                     \n\t" \
+                 "push.a  r8                     \n\t" \
+                 "push.a  r9                     \n\t" \
+                 "push.a  r10                    \n\t" \
+                 "push.a  r11                    \n\t" \
+                 "push.a  r12                    \n\t" \
+                 "push.a  r13                    \n\t" \
+                 "push.a  r14                    \n\t" \
+                 "push.a  r15                    \n\t" \
+                 "mov.w usCriticalNesting, r14   \n\t" \
+                 "push.a  r14                    \n\t" \
+                 "mov.a   pxCurrentTCB, r12      \n\t" \
+                 "mov.a   r1, @r12               \n\t");
 
 /*
  * Macro to restore a task context from the task stack.  This is effectively
@@ -108,33 +108,32 @@ volatile uint16_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
  * The bic instruction ensures there are no low power bits set in the status
  * register that is about to be popped from the stack.
  */
-#define portRESTORE_CONTEXT()                         \
-    asm volatile("mov.w pxCurrentTCB, r12       \n\t" \
-                 "mov.w @r12, sp                \n\t" \
-                 "pop   r15                     \n\t" \
-                 "mov.w r15, usCriticalNesting  \n\t" \
-                 "pop   r15                     \n\t" \
-                 "pop   r14                     \n\t" \
-                 "pop   r13                     \n\t" \
-                 "pop   r12                     \n\t" \
-                 "pop   r11                     \n\t" \
-                 "pop   r10                     \n\t" \
-                 "pop   r9                      \n\t" \
-                 "pop   r8                      \n\t" \
-                 "pop   r7                      \n\t" \
-                 "pop   r6                      \n\t" \
-                 "pop   r5                      \n\t" \
-                 "pop   r4                      \n\t" \
-                 "bic   #(0xf0),0(r1)           \n\t" \
-                 "reti                          \n\t");
+#define portRESTORE_CONTEXT()                           \
+    asm volatile("mov.a   pxCurrentTCB, r12       \n\t" \
+                 "mov.a   @r12, sp                \n\t" \
+                 "pop.a   r15                     \n\t" \
+                 "mov.w r15, usCriticalNesting    \n\t" \
+                 "pop.a   r15                     \n\t" \
+                 "pop.a   r14                     \n\t" \
+                 "pop.a   r13                     \n\t" \
+                 "pop.a   r12                     \n\t" \
+                 "pop.a   r11                     \n\t" \
+                 "pop.a   r10                     \n\t" \
+                 "pop.a   r9                      \n\t" \
+                 "pop.a   r8                      \n\t" \
+                 "pop.a   r7                      \n\t" \
+                 "pop.a   r6                      \n\t" \
+                 "pop.a   r5                      \n\t" \
+                 "pop.a   r4                      \n\t" \
+                 "bic #(0xf0),0(r1)               \n\t" \
+                 "reta                            \n\t");
 /*-----------------------------------------------------------*/
 
 /*
  * Sets up the periodic ISR used for the RTOS tick.  This uses timer 0, but
  * could have alternatively used the watchdog timer or timer 1.
  */
-static void
-prvSetupTimerInterrupt(void);
+static void prvSetupTimerInterrupt(void);
 /*-----------------------------------------------------------*/
 
 /*
@@ -261,9 +260,7 @@ void vPortYield(void)
     msp430 places the status register onto the stack.  As this is a function
     call and not an ISR we have to do this manually. */
     asm volatile("push  sr");
-    _NOP();
-    _DINT();
-    _NOP();
+    __disable_interrupt();
 
     /* Save the context of the current task. */
     portSAVE_CONTEXT();

@@ -12,6 +12,11 @@
         "signal.h": "c",
         "cdefs.h": "c",
         "task.h": "c",
-        "portmacro.h": "c"
+        "portmacro.h": "c",
+        "freertosconfig.h": "c",
+        "cstdio": "c",
+        "type_traits": "c",
+        "typeinfo": "c",
+        "*.tcc": "c"
     }
 }
