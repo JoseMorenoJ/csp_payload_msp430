@@ -24,22 +24,16 @@ If you need to update the driverlib or if you need to add the driverlib for anot
 
 I tried to run the cmake using `include msp430-toolchain.cmake` inside the CMakeListst.txt but it does not import the variables properly.
 
-## Limitations
+## Limitations and bugs
 
-- Only small data model is used now. If you need the large data model you will need to add some definitions in FreeRTOS.
+### GCC build
 
-# Projects
+- Large data model is used for the blink example but not with FreeRTOS.
+- FreeRTOS is not running properly. Some issues when changing the context. I suspect is related to the data model.
 
-1) *Blinky*: Simple Blinky program
-2) *LPM35*: Set device into LPM3.5, wake up using external interrupt
-3) *Timer*: Toggle LED periodically using internal timer, test UART
-4) *Test*: Test application to investigate power consumption and lifetime using a supercapacitor (UART Baudrate: 9600)
-5) *Test_LPM35*: Test application to investigate power consumption and lifetime using a supercapacitor (UART Baudrate: 9600)
-6) *Test_Si7021*: Periodically reads and prints temperature/humidity readings from Si7021 sensor
-7) *RFM95*: Periodically transmit LoRa packets using RFM95 transceiver
+### CCS build
 
-- *Tools*: includes devices drivers, e.g., UART, temperature sensor
-- *MSP430FR5xx_6xx*: device drivers from TI to access board's peripherals (e.g., including driverlib)
+- CMake fails to build the minimum example program. Some issues with the linker.
 
 # MSPDebug
 
