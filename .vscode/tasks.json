@@ -4,17 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "tsconfig": "tsconfig.json",
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
             "label": "cmake",
             "command": "cmake", // Could be any other shell command
             "args": [

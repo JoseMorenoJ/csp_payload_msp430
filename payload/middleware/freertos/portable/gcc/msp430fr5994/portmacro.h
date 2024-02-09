@@ -58,12 +58,12 @@ extern "C"
 #ifdef __LARGE_DATA_MODEL__
 #define portSTACK_TYPE uint32_t
 #define portPOINTER_SIZE_TYPE uint32_t
+#define portBASE_TYPE int
 #else
 #define portSTACK_TYPE uint16_t
 #define portPOINTER_SIZE_TYPE uint16_t
-#endif
-
 #define portBASE_TYPE short
+#endif
 
     typedef portSTACK_TYPE StackType_t;
     typedef short BaseType_t;
