@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "typescript",
+            "type": "shell",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
                 "$tsc"
@@ -13,6 +13,19 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "cmake",
+            "command": "cmake", // Could be any other shell command
+            "args": [
+                "-B",
+                "build",
+                "-G",
+                "Ninja",
+                "-S",
+                ".",
+            ],
+            "type": "shell",
         },
         {
             "label": "clean",
