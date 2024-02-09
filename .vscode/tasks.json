@@ -28,6 +28,14 @@
             "type": "shell",
         },
         {
+            "label": "build",
+            "command": "ninja", // Could be any other shell command
+            "type": "shell",
+            "options": {
+                "cwd": "build"
+            }
+        },
+        {
             "label": "clean",
             "command": "rm", // Could be any other shell command
             "args": [
