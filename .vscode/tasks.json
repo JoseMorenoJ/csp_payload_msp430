@@ -4,17 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "tsconfig": "tsconfig.json",
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
             "label": "cmake",
             "command": "cmake", // Could be any other shell command
             "args": [
@@ -25,6 +14,14 @@
                 "-S",
                 ".",
             ],
+            "type": "shell",
+        },
+        {
+            "label": "build",
+            "command": "ninja", // Could be any other shell command
+            "options": {
+                "cwd": "build"
+            },
             "type": "shell",
         },
         {

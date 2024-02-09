@@ -6,8 +6,6 @@ include(toolchain/msp430-ccs-toolchain.cmake)
 project(csp_payload)
 
 message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
-
-message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
 message(STATUS "CMAKE_CXX_COMPILER='${CMAKE_CXX_COMPILER}'")
 
 # The default C Flags for CCS
