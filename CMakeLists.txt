@@ -3,47 +3,45 @@ cmake_minimum_required(VERSION 3.6)
 # Include the toolchain to be used and set the "COMPILER_FAMILY" variable used (GCC or CCS)
 include(toolchain/msp430-ccs-toolchain.cmake)
 
-project(csp_payload)
+project(csp_payload C)
 
 message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
-message(STATUS "CMAKE_CXX_COMPILER='${CMAKE_CXX_COMPILER}'")
 
-# The default C Flags for CCS
-string(APPEND CMAKE_C_FLAGS
-    "--emit_warnings_as_errors \
-    --c99 \
-    --advice:power=all \
-    --advice:hw_config=all \
-    --printf_support=minimal \
-    --diag_warning=225 \
-    --diag_wrap=off \
-    --display_error_number"
+# Absolute path to FreeRTOS config file directory
+set(FREERTOS_CONFIG_FILE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/config/freertos/inc" CACHE STRING "Absolute path to the directory with FreeRTOSConfig.h")
+# Heap number or absolute path to custom heap implementation provided by user
+set(FREERTOS_HEAP "4" CACHE STRING "FreeRTOS heap model number. 1 .. 5. Or absolute path to custom heap source file")
+set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+
+add_compile_options(
+    --advice:power=all
+    --advice:hw_config=all
+    --diag_warning=225
+    --diag_wrap=off
+    --display_error_number
+    --emit_warnings_as_errors
+    --c99
+    --use_hw_mpy=F5
+    --silicon_version=mspx
+    --data_model=restricted
+    -o2
+    --printf_support=minimal
 )
 
 # The linker options for CCS
-string(APPEND CMAKE_EXE_LINKER_FLAGS
-    "-z \
-    -m\"${PROJECT_NAME}.map\" \
-    --heap_size=160 \
-    --stack_size=160 \
-    --cinit_hold_wdt=on \
-    --priority \
-    --reread_libs \
-    --diag_wrap=off \
-    --display_error_number \
-    --warn_sections \
-    --xml_link_info=\"${PROJEC_NAME}_link_info.xml\" \
-    --use_hw_mpy=F5 \
-    --rom_model"
+add_link_options(
+    --map_file=${PROJECT_NAME}.map
+    --xml_link_info=${PROJECT_NAME}_link_info.xml
+    --heap_size=160
+    --stack_size=160
+    --cinit_hold_wdt=on
+    --priority
+    --reread_libs
+    --warn_sections
 )
-# Optimizations depending on debug or release
-if(DEFINED DEBUG)
-    string(APPEND CMAKE_C_FLAGS " -Og")
-    string(APPEND CMAKE_EXE_LINKER_FLAGS " -Og -g")
-else()
-    string(APPEND CMAKE_C_FLAGS " -O2")
-    string(APPEND CMAKE_EXE_LINKER_FLAGS " -O2")
-endif()
+    # --rom_model
 
 # Compile the source
 add_subdirectory(payload)

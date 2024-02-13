@@ -5,6 +5,7 @@ add_library(led STATIC
 
 target_include_directories(led
     PUBLIC inc
+    PRIVATE src
 )
 
 target_link_libraries(led driverlib)
