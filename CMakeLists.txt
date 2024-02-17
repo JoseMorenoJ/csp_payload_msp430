@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.6)
 # Include the toolchain to be used and set the "COMPILER_FAMILY" variable used (GCC or CCS)
 include(toolchain/msp430-ccs-toolchain.cmake)
 
-project(csp_payload C)
+project(csp_payload C ASM)
 
 message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
 
@@ -16,18 +16,20 @@ set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 add_compile_options(
-    --advice:power=all
-    --advice:hw_config=all
+    # --advice:power=all
+    # --advice:hw_config=all
+    --silicon_version=mspx
+    --code_model=large
+    --data_model=restricted
+    --use_hw_mpy=F5
     --diag_warning=225
     --diag_wrap=off
     --display_error_number
     --emit_warnings_as_errors
     --c99
-    --use_hw_mpy=F5
-    --silicon_version=mspx
-    --data_model=restricted
     -o2
     --printf_support=minimal
+    # --define=_MPU_ENABLE
 )
 
 # The linker options for CCS
@@ -41,7 +43,6 @@ add_link_options(
     --reread_libs
     --warn_sections
 )
-    # --rom_model
 
 # Compile the source
 add_subdirectory(payload)

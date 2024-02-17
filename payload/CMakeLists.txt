@@ -14,9 +14,9 @@ add_executable(${TARGET}
 #     ${CMAKE_CURRENT_LIST_DIR}/config/freertos/inc
 # )
 
-add_subdirectory(drivers/msp430fr5xx_6xx)
-add_subdirectory(drivers/dbg_print)
-add_subdirectory(drivers/led)
+# add_subdirectory(drivers/msp430fr5xx_6xx)
+# add_subdirectory(drivers/dbg_print)
+# add_subdirectory(drivers/led)
 # add_subdirectory(middleware/freertos)
 
-target_link_libraries(${TARGET} driverlib led dbg_print) #freertos_kernel)
+# target_link_libraries(${TARGET} driverlib led dbg_print) #freertos_kernel)

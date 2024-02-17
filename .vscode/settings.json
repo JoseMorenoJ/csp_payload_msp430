@@ -17,6 +17,7 @@
         "cstdio": "c",
         "type_traits": "c",
         "typeinfo": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "msp430fr5994.h": "c"
     }
 }
