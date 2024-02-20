@@ -26,11 +26,12 @@
         },
         {
             "label": "clean",
-            "command": "rm", // Could be any other shell command
+            "command": "del", // Could be any other shell command
             "args": [
-                "-r",
-                "build/*",
-                "build/.*"
+                // "-r",
+                "build",
+                // "build/.*"
+                "-Recurse", "-Force",
             ],
             "type": "shell",
         }

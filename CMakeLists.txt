@@ -18,21 +18,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 add_compile_options(
     --advice:power=all
     --advice:hw_config=all
+    --printf_support=minimal
     --diag_warning=225
     --diag_wrap=off
     --display_error_number
     --emit_warnings_as_errors
     --c99
-    --use_hw_mpy=F5
-    --silicon_version=mspx
-    --data_model=restricted
     -o2
-    --printf_support=minimal
+    -g
 )
 
 # The linker options for CCS
 add_link_options(
-    --map_file=${PROJECT_NAME}.map
     --xml_link_info=${PROJECT_NAME}_link_info.xml
     --heap_size=160
     --stack_size=160
@@ -40,8 +37,10 @@ add_link_options(
     --priority
     --reread_libs
     --warn_sections
-)
-    # --rom_model
+    --diag_wrap=off
+    --use_hw_mpy=F5
+    --rom_model
+    )
 
 # Compile the source
 add_subdirectory(payload)
