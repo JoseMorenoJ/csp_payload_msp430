@@ -2,27 +2,31 @@
 #include "task.h"
 #include "driverlib.h"
 
+
 void vApplicationSetupTimerInterrupt(void)
 {
-    // Configure FreeRTOS tick at 1ms
+    // configure FreeRTOS tick at 1ms
+
     Timer_A_stop(TA0_BASE);
     Timer_A_clear(TA0_BASE);
 
-    Timer_A_initUpModeParam param = {
-        .clockSource = TIMER_A_CLOCKSOURCE_SMCLK,
-        .clockSourceDivider = TIMER_A_CLOCKSOURCE_DIVIDER_64,
-        .timerPeriod = 250,
-        .timerInterruptEnable_TAIE = TIMER_A_TAIE_INTERRUPT_ENABLE,
+    Timer_A_initUpModeParam param =
+    {
+        .clockSource                             = TIMER_A_CLOCKSOURCE_SMCLK,
+        .clockSourceDivider                      = TIMER_A_CLOCKSOURCE_DIVIDER_64,
+        .timerPeriod                             = 250,
+        .timerInterruptEnable_TAIE               = TIMER_A_TAIE_INTERRUPT_DISABLE,
         .captureCompareInterruptEnable_CCR0_CCIE = TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
-        .timerClear = TIMER_A_DO_CLEAR,
-        .startTimer = false};
+        .timerClear                              = TIMER_A_DO_CLEAR,
+        .startTimer                              = false
+    };
 
     Timer_A_initUpMode(TA0_BASE, &param);
     Timer_A_clearTimerInterrupt(TA0_BASE);
     Timer_A_startCounter(TA0_BASE, TIMER_A_UP_MODE);
 }
 
-// From CSS build example:
+
 static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
 
 /* configSUPPORT_STATIC_ALLOCATION is set to 1, so the application must provide an

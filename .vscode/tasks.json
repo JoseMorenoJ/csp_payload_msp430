@@ -13,11 +13,37 @@
                 "Ninja",
                 "-S",
                 ".",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "--fresh",
             ],
             "type": "shell",
         },
         {
-            "label": "build",
+            "label": "cmake build debug",
+            "command": "cmake", // Could be any other shell command
+            "args": [
+                "--build",
+                "build",
+                "--config",
+                "Debug",
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "cmake build clean",
+            "command": "cmake", // Could be any other shell command
+            "args": [
+                "--build",
+                "build",
+                "--config",
+                "Debug",
+                "--",
+                "clean",
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "ninja build",
             "command": "ninja", // Could be any other shell command
             "options": {
                 "cwd": "build"
@@ -25,12 +51,24 @@
             "type": "shell",
         },
         {
-            "label": "clean",
-            "command": "rm", // Could be any other shell command
+            "label": "ninja clean",
+            "command": "ninja", // Could be any other shell command
             "args": [
-                "-r",
-                "build/*",
-                "build/.*"
+                "clean",
+            ],
+            "options": {
+                "cwd": "build"
+            },
+            "type": "shell",
+        },
+        {
+            "label": "rm build",
+            "command": "del", // Could be any other shell command
+            "args": [
+                // "-r",
+                "build",
+                // "build/.*"
+                "-Recurse", "-Force",
             ],
             "type": "shell",
         }
