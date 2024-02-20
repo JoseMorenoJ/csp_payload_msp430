@@ -39,16 +39,14 @@ set(CMAKE_FIND_ROOT_PATH  "")
 # Common compile flags
 set(CMAKE_C_FLAGS
     "--silicon_version=mspx \
-    --data_model=restricted \
     --use_hw_mpy=F5 \
     --silicon_errata=CPU21 \
     --silicon_errata=CPU22 \
     --silicon_errata=CPU40 \
     --define=${DEVICE_DEFINE} \
-    --define=_MPU_ENABLE \
     -I${PATH_MSP430_SUPPORT_INC} \
     -I${PATH_MSP430_INCLUDE}"
-CACHE STRING "")
+    CACHE STRING "")
 
 # Linker flags
 set(CMAKE_EXE_LINKER_FLAGS

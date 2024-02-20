@@ -16,8 +16,10 @@ set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 add_compile_options(
-    --advice:power=all
-    --advice:hw_config=all
+    # --advice:power=all
+    # --advice:hw_config=all
+    --data_model=restricted
+    --code_model=large
     --printf_support=minimal
     --diag_warning=225
     --diag_wrap=off
@@ -40,7 +42,7 @@ add_link_options(
     --diag_wrap=off
     --use_hw_mpy=F5
     --rom_model
-    )
+)
 
 # Compile the source
 add_subdirectory(payload)
