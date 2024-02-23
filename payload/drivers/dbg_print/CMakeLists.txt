@@ -3,7 +3,7 @@ set(target dbg_print)
 
 # Create the target
 add_library(${target} STATIC
-${CMAKE_CURRENT_LIST_DIR}/src/dbg_print.c
+    ${CMAKE_CURRENT_LIST_DIR}/src/dbg_print.c
 )
 
 target_include_directories(${target}

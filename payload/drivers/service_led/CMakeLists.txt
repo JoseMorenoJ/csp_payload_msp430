@@ -3,7 +3,7 @@ set(target service_led)
 
 # Create the target
 add_library(${target} STATIC
-${CMAKE_CURRENT_LIST_DIR}/src/service_led.c
+    ${CMAKE_CURRENT_LIST_DIR}/src/service_led.c
 )
 
 target_include_directories(${target}

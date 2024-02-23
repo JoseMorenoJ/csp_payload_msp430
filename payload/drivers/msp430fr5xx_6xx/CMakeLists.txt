@@ -1,36 +1,41 @@
+# Define the executable
+set(target driverlib)
 
-add_library(driverlib STATIC
-    adc12_b.c
-    aes256.c
-    comp_e.c
-    crc.c
-    crc32.c
-    cs.c
-    dma.c
-    esi.c
-    eusci_a_spi.c
-    eusci_a_uart.c
-    eusci_b_i2c.c
-    eusci_b_spi.c
-    framctl.c
-    framctl_a.c
-    gpio.c
-    lcd_c.c
-    mpu.c
-    mpy32.c
-    pmm.c
-    ram.c
-    ref_a.c
-    rtc_b.c
-    rtc_c.c
-    sfr.c
-    sysctl.c
-    timer_a.c
-    timer_b.c
-    tlv.c
-    wdt_a.c
+# Create the target
+add_library(${target} STATIC
+    ${CMAKE_CURRENT_LIST_DIR}/adc12_b.c
+    ${CMAKE_CURRENT_LIST_DIR}/aes256.c
+    ${CMAKE_CURRENT_LIST_DIR}/comp_e.c
+    ${CMAKE_CURRENT_LIST_DIR}/crc.c
+    ${CMAKE_CURRENT_LIST_DIR}/crc32.c
+    ${CMAKE_CURRENT_LIST_DIR}/cs.c
+    ${CMAKE_CURRENT_LIST_DIR}/dma.c
+    ${CMAKE_CURRENT_LIST_DIR}/esi.c
+    ${CMAKE_CURRENT_LIST_DIR}/eusci_a_spi.c
+    ${CMAKE_CURRENT_LIST_DIR}/eusci_a_uart.c
+    ${CMAKE_CURRENT_LIST_DIR}/eusci_b_i2c.c
+    ${CMAKE_CURRENT_LIST_DIR}/eusci_b_spi.c
+    ${CMAKE_CURRENT_LIST_DIR}/framctl.c
+    ${CMAKE_CURRENT_LIST_DIR}/framctl_a.c
+    ${CMAKE_CURRENT_LIST_DIR}/gpio.c
+    ${CMAKE_CURRENT_LIST_DIR}/lcd_c.c
+    ${CMAKE_CURRENT_LIST_DIR}/mpu.c
+    ${CMAKE_CURRENT_LIST_DIR}/mpy32.c
+    ${CMAKE_CURRENT_LIST_DIR}/pmm.c
+    ${CMAKE_CURRENT_LIST_DIR}/ram.c
+    ${CMAKE_CURRENT_LIST_DIR}/ref_a.c
+    ${CMAKE_CURRENT_LIST_DIR}/rtc_b.c
+    ${CMAKE_CURRENT_LIST_DIR}/rtc_c.c
+    ${CMAKE_CURRENT_LIST_DIR}/sfr.c
+    ${CMAKE_CURRENT_LIST_DIR}/sysctl.c
+    ${CMAKE_CURRENT_LIST_DIR}/timer_a.c
+    ${CMAKE_CURRENT_LIST_DIR}/timer_b.c
+    ${CMAKE_CURRENT_LIST_DIR}/tlv.c
+    ${CMAKE_CURRENT_LIST_DIR}/wdt_a.c
 )
 
-target_include_directories(driverlib
-    PUBLIC inc .
+target_include_directories(${target}
+    PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}/inc
+    ${CMAKE_CURRENT_LIST_DIR}
 )
