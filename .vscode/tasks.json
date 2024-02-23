@@ -62,13 +62,21 @@
             "type": "shell",
         },
         {
-            "label": "rm build",
+            "label": "del build (powershell)",
             "command": "del", // Could be any other shell command
             "args": [
-                // "-r",
                 "build",
-                // "build/.*"
-                "-Recurse", "-Force",
+                "-Recurse",
+                "-Force",
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "rm build (cmd)",
+            "command": "rm", // Could be any other shell command
+            "args": [
+                "-r",
+                "build",
             ],
             "type": "shell",
         }

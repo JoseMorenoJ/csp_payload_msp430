@@ -11,15 +11,28 @@ add_executable(${TARGET}
 # Absolute path to FreeRTOS config file directory
 set(FREERTOS_CONFIG_FILE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/config/freertos/inc" CACHE STRING "Absolute path to the directory with FreeRTOSConfig.h")
 
-include_directories(${TARGET} PRIVATE
+include_directories(${TARGET}
+    PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/config/freertos/src
     PUBLIC
     ${FREERTOS_CONFIG_FILE_DIRECTORY}
 )
 
+# Add the drivers subdirectories
 add_subdirectory(drivers/msp430fr5xx_6xx)
 add_subdirectory(drivers/dbg_print)
-add_subdirectory(drivers/led)
-add_subdirectory(middleware/freertos)
+add_subdirectory(drivers/service_led)
 
-target_link_libraries(${TARGET} driverlib led dbg_print freertos_kernel)
+# Add the middlewares subdirectories
+add_subdirectory(middleware/freertos freertos)
+
+# Add the services subdirectories
+add_subdirectory(services/service_task service_task)
+
+target_link_libraries(${TARGET}
+    driverlib
+    service_led
+    dbg_print
+    freertos_kernel
+    service_task
+)

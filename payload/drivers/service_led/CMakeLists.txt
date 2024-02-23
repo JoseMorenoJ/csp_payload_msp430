@@ -1,9 +1,9 @@
 # Define the executable
-set(target dbg_print)
+set(target service_led)
 
 # Create the target
 add_library(${target} STATIC
-${CMAKE_CURRENT_LIST_DIR}/src/dbg_print.c
+${CMAKE_CURRENT_LIST_DIR}/src/service_led.c
 )
 
 target_include_directories(${target}

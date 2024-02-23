@@ -6,13 +6,13 @@
  */
 #include <assert.h>
 
-#include "led.h"
+#include "service_led.h"
 #include "driverlib.h"
 
 /** @brief Return the Port and Pin HW values for the selected user LED */
 static void get_port_pin(uint8_t *const port, uint16_t *const pin, const led_select_t select);
 
-void led_init_gpos(void)
+void led_init(void)
 {
     // Set P1.0 to output direction
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);

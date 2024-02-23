@@ -16,6 +16,8 @@ set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
 add_compile_options(
     # --advice:power=all
     # --advice:hw_config=all
+    --silicon_version=mspx
+    --use_hw_mpy=F5
     --data_model=large
     --code_model=large
     --printf_support=minimal

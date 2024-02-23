@@ -11,9 +11,9 @@ set(DEVICE_DEFINE "__${DEVICE_DEFINE}__")
 # The cmake test program compilation uses:
 #   ${CMAKE_C_COMPILER} ${CMAKE_C_FLAGS} --run-linker --output_file=xxx --map_file=xxx.map ${CMAKE_EXE_LINKER_FLAGS} xxx.obj
 # MSP430 support files (installation dependent --> ADJUST ACCORDINGLY)
-set(PATH_TI_CGT_MSP430 "C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS" CACHE STRING "")
-set(PATH_MSP430_SUPPORT_INC "C:/ti/ccs1260/ccs/ccs_base/msp430/include" CACHE STRING "")
-set(PATH_MSP430_SUPPORT_LIB "C:/ti/ccs1260/ccs/ccs_base/msp430/lib" CACHE STRING "")
+set(PATH_TI_CGT_MSP430 "C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS" CACHE STRING "")
+set(PATH_MSP430_SUPPORT_INC "C:/ti/ccs1250/ccs/ccs_base/msp430/include" CACHE STRING "")
+set(PATH_MSP430_SUPPORT_LIB "C:/ti/ccs1250/ccs/ccs_base/msp430/lib" CACHE STRING "")
 set(PATH_MSP430_INCLUDE "${PATH_TI_CGT_MSP430}/include" CACHE STRING "")
 set(PATH_MSP430_LIB "${PATH_TI_CGT_MSP430}/lib" CACHE STRING "")
 set(PATH_MSP430_BIN "${PATH_TI_CGT_MSP430}/bin" CACHE STRING "")
@@ -38,9 +38,7 @@ set(CMAKE_FIND_ROOT_PATH  "")
 
 # Common compile flags
 set(CMAKE_C_FLAGS
-    "--silicon_version=mspx \
-    --use_hw_mpy=F5 \
-    --silicon_errata=CPU21 \
+    "--silicon_errata=CPU21 \
     --silicon_errata=CPU22 \
     --silicon_errata=CPU40 \
     --define=${DEVICE_DEFINE} \
