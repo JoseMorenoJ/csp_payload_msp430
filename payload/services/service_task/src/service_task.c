@@ -59,21 +59,19 @@ static void service_task(void *arg)
     (void)arg;
 
     // Switch on the red LED
-    led_set(LED_RED, true);
+    led_set(LED_GREEN, true);
 
     // print2uart("Start main loop.\n");
     while (true)
     {
         // Blink the status leds
         led_toggle(LED_RED);
-        led_toggle(LED_GREEN);
 
         // Do service stuff
         vTaskDelay(10);
 
         // Blink the status leds
         led_toggle(LED_RED);
-        led_toggle(LED_GREEN);
 
         // Delay
         vTaskDelay(SERVICE_TASK_SLEEP_MS);
