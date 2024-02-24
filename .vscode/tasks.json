@@ -4,17 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "tsconfig": "tsconfig.json",
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
             "label": "cmake",
             "command": "cmake", // Could be any other shell command
             "args": [
@@ -24,24 +13,70 @@
                 "Ninja",
                 "-S",
                 ".",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "--fresh",
             ],
             "type": "shell",
         },
         {
-            "label": "build",
-            "command": "ninja", // Could be any other shell command
+            "label": "cmake build debug",
+            "command": "cmake", // Could be any other shell command
+            "args": [
+                "--build",
+                "build",
+                "--config",
+                "Debug",
+            ],
             "type": "shell",
-            "options": {
-                "cwd": "build"
-            }
         },
         {
-            "label": "clean",
+            "label": "cmake build clean",
+            "command": "cmake", // Could be any other shell command
+            "args": [
+                "--build",
+                "build",
+                "--config",
+                "Debug",
+                "--",
+                "clean",
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "ninja build",
+            "command": "ninja", // Could be any other shell command
+            "options": {
+                "cwd": "build"
+            },
+            "type": "shell",
+        },
+        {
+            "label": "ninja clean",
+            "command": "ninja", // Could be any other shell command
+            "args": [
+                "clean",
+            ],
+            "options": {
+                "cwd": "build"
+            },
+            "type": "shell",
+        },
+        {
+            "label": "del build (powershell)",
+            "command": "del", // Could be any other shell command
+            "args": [
+                "build",
+                "-Recurse",
+                "-Force",
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "rm build (cmd)",
             "command": "rm", // Could be any other shell command
             "args": [
                 "-r",
-                "build/*",
-                "build/.*"
+                "build",
             ],
             "type": "shell",
         }

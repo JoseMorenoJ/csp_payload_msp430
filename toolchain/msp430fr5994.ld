@@ -31,7 +31,11 @@
 /* ============================================================================ */
 
 /* This file supports MSP430FR5994 devices. */
+<<<<<<< HEAD
 /* Version: 1.212 */
+=======
+/* Version: 1.213 */
+>>>>>>> msp430ccs
 /* Default linker script, for normal executables */
 
 OUTPUT_ARCH(msp430)

@@ -1,34 +1,49 @@
 cmake_minimum_required(VERSION 3.6)
 
-include(toolchain/msp430-gcc-toolchain.cmake)
+# Include the toolchain to be used and set the "COMPILER_FAMILY" variable used (GCC or CCS)
+include(toolchain/msp430-ccs-toolchain.cmake)
 
-project(csp_payload)
+project(csp_payload C ASM)
 
 message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
-message(STATUS "CMAKE_CXX_COMPILER='${CMAKE_CXX_COMPILER}'")
 
-# The default C Flags
-list(APPEND BUILD_FLAGS_LIST
-    ${CMAKE_C_FLAGS}
-    -std=c11
-    -fno-builtin
-    -Wall
-    -Wno-int-to-pointer-cast
+# Heap number or absolute path to custom heap implementation provided by user
+set(FREERTOS_HEAP "4" CACHE STRING "FreeRTOS heap model number. 1 .. 5. Or absolute path to custom heap source file")
+set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
+
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+
+add_compile_options(
+    # --advice:power=all
+    # --advice:hw_config=all
+    --silicon_version=mspx
+    --use_hw_mpy=F5
+    --data_model=large
+    --code_model=large
+    --printf_support=minimal
+    --diag_warning=225
+    --diag_wrap=off
+    --display_error_number
+    --emit_warnings_as_errors
+    --c99
+    -o2
     -g
-    -gdwarf-3
-    -gstrict-dwarf
-    -fstrict-aliasing
-    -Wstrict-aliasing
 )
 
-# Optimizations depending on debug or release
-if(DEFINED DEBUG)
-    list(APPEND BUILD_FLAGS_LIST -Og)
-else()
-    list(APPEND BUILD_FLAGS_LIST -Os)
-endif()
+# The linker options for CCS
+add_link_options(
+    --xml_link_info=payload/${PROJECT_NAME}_link_info.xml
+    --map_file=payload/${PROJECT_NAME}.map
+    --heap_size=160
+    --stack_size=160
+    --cinit_hold_wdt=on
+    --priority
+    --reread_libs
+    --warn_sections
+    --diag_wrap=off
+    --use_hw_mpy=F5
+    --rom_model
+)
 
-set(CMAKE_C_FLAGS ${BUILD_FLAGS_LIST})
-
-# Compile the source
+# Compile the source (the binaries will be generated in build/payload)
 add_subdirectory(payload)

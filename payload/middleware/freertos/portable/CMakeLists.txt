@@ -27,8 +27,8 @@ add_library(freertos_kernel_port STATIC
 
     # Texas Instruments MSP430 port for Texas Instruments Code Composer Studio
     $<$<STREQUAL:${FREERTOS_PORT},CCS_MSP430X>:
-        CCS/MSP430X/port.c
-        CCS/MSP430X/portext.asm>
+        ccs/msp430x/port.c
+        ccs/msp430x/portext.asm>
 
     # NXP (formerly Motorola, Freescale) Cold Fire and 68HCS12 ports for Code Warrior
     $<$<STREQUAL:${FREERTOS_PORT},CODEWARRIOR_COLDFIRE_V1>:
@@ -692,7 +692,7 @@ target_include_directories(freertos_kernel_port PUBLIC
     $<$<STREQUAL:${FREERTOS_PORT},CCS_ARM_CR4>:${CMAKE_CURRENT_LIST_DIR}/CCS/ARM_Cortex-R4>
 
     # Texas Instruments MSP430 port for Texas Instruments Code Composer Studio
-    $<$<STREQUAL:${FREERTOS_PORT},CCS_MSP430X>:${CMAKE_CURRENT_LIST_DIR}/CCS/MSP430X>
+    $<$<STREQUAL:${FREERTOS_PORT},CCS_MSP430X>:${CMAKE_CURRENT_LIST_DIR}/ccs/msp430x>
 
     # NXP (formerly Motorola, Freescale) Cold Fire and 68HCS12 ports for Code Warrior
     $<$<STREQUAL:${FREERTOS_PORT},CODEWARRIOR_COLDFIRE_V1>:${CMAKE_CURRENT_LIST_DIR}/CodeWarrior/ColdFire_V1>

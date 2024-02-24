@@ -1,9 +1,9 @@
 # Define the executable
-set(target dbg_print)
+set(target service_task)
 
-# Create the target
+# Create target
 add_library(${target} STATIC
-    ${CMAKE_CURRENT_LIST_DIR}/src/dbg_print.c
+    ${CMAKE_CURRENT_LIST_DIR}/src/service_task.c
 )
 
 target_include_directories(${target}
@@ -11,4 +11,4 @@ target_include_directories(${target}
     PUBLIC ${CMAKE_CURRENT_LIST_DIR}/inc
 )
 
-target_link_libraries(${target} driverlib)
+target_link_libraries(${target} service_led freertos_kernel)
