@@ -21,6 +21,7 @@
         "msp430fr5994.h": "c",
         "eusci_a_spi.h": "c",
         "eusci_a_uart.h": "c",
-        "eusci_b_i2c.h": "c"
+        "eusci_b_i2c.h": "c",
+        "service_task.h": "c"
     }
 }

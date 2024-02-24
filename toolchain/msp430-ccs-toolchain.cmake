@@ -26,10 +26,11 @@ set(CMD_LINKER_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/toolchain/lnk_${DEVICE}.cmd" 
 set(CMAKE_C_COMPILER    "${PATH_MSP430_BIN}/cl430.exe")
 set(CMAKE_CXX_COMPILER  "${PATH_MSP430_BIN}/cl430.exe")
 set(CMAKE_AR            "${PATH_MSP430_BIN}/ar430.exe")
-set(CMAKE_C_LINKER        "${PATH_MSP430_BIN}/lnk430.exe")
+set(CMAKE_C_LINKER      "${PATH_MSP430_BIN}/lnk430.exe")
 set(CMAKE_NM            "${PATH_MSP430_BIN}/nm430.exe")
 set(CMAKE_OBJDUMP       "${PATH_MSP430_BIN}/ofd430.exe")
 set(CMAKE_STRIP         "${PATH_MSP430_BIN}/strip430.exe")
+set(MSP430_HEX_TOOL     "${PATH_MSP430_BIN}/hex430.exe")
 
 # set(CMAKE_C_COMPILER_WORKS True)
 # set(CMAKE_CXX_COMPILER_WORKS True)

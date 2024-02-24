@@ -29,8 +29,10 @@ add_subdirectory(middleware/freertos freertos)
 # Add the services subdirectories
 add_subdirectory(services/service_task service_task)
 
-target_link_libraries(${TARGET}
+target_link_libraries(${TARGET} PUBLIC
     driverlib
-    service_task
+    dbg_print
+    service_led
     freertos_kernel
+    service_task
 )

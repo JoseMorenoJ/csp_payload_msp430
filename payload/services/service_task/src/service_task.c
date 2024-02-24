@@ -5,7 +5,8 @@
  *
  */
 
-#include "service_led.h "
+#include "service_led.h"
+#include "FreeRTOS.h"
 #include "task.h"
 
 /***************************************************************************************************
@@ -17,7 +18,7 @@
  **************************************************************************************************/
 // Define the service task attributes
 #define SERVICE_TASK_STACK_SZ (configMINIMAL_STACK_SIZE + 20)
-static TaskHandle_t h_led_task = NULL;
+#define SERVICE_TASK_SLEEP_MS 1000
 
 /***************************************************************************************************
  * PRIVATE TYPE DEFINITIONS
@@ -26,6 +27,7 @@ static TaskHandle_t h_led_task = NULL;
 /***************************************************************************************************
  * STATIC VARIABLES
  **************************************************************************************************/
+static TaskHandle_t h_service_task = NULL;
 
 /***************************************************************************************************
  * STATIC DECLARATIONS
@@ -44,8 +46,8 @@ void init_service_task(void)
                                  SERVICE_TASK_STACK_SZ,
                                  NULL,
                                  configDEFAULT_TASK_PRIO,
-                                 &h_led_task);
-    configASSERT(h_led_task);
+                                 &h_service_task);
+    configASSERT(h_service_task);
 }
 
 /***************************************************************************************************
@@ -59,7 +61,7 @@ static void service_task(void *arg)
     // Switch on the red LED
     led_set(LED_RED, true);
 
-    print2uart("Start main loop.\n");
+    // print2uart("Start main loop.\n");
     while (true)
     {
         // Blink the status leds
@@ -74,13 +76,6 @@ static void service_task(void *arg)
         led_toggle(LED_GREEN);
 
         // Delay
-        vTaskDelay(SERVICE_TASK_DELAY);
+        vTaskDelay(SERVICE_TASK_SLEEP_MS);
     }
-}
-
-static void blink_leds(void)
-{
-    // Toggle the LEDs
-    led_toggle(LED_RED);
-    led_toggle(LED_GREEN);
 }

@@ -1,1 +1,5 @@
+# Build products
 build/
+
+# TI MSP flasher logs
+Log/

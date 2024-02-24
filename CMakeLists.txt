@@ -32,7 +32,8 @@ add_compile_options(
 
 # The linker options for CCS
 add_link_options(
-    --xml_link_info=${PROJECT_NAME}_link_info.xml
+    --xml_link_info=payload/${PROJECT_NAME}_link_info.xml
+    --map_file=payload/${PROJECT_NAME}.map
     --heap_size=160
     --stack_size=160
     --cinit_hold_wdt=on
@@ -44,5 +45,5 @@ add_link_options(
     --rom_model
 )
 
-# Compile the source
+# Compile the source (the binaries will be generated in build/payload)
 add_subdirectory(payload)
