@@ -8,6 +8,7 @@ set(FREERTOS_CONFIG_FILE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/config/freertos/in
 # Create target
 add_executable(${TARGET}
     ${CMAKE_CURRENT_LIST_DIR}/main.c
+    ${CMAKE_CURRENT_LIST_DIR}/config/freertos/src/FreeRTOSConfig.c
 )
 
 include_directories(${TARGET}
