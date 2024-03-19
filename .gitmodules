@@ -1,0 +1,3 @@
+[submodule "libcsp"]
+	path = payload/middleware/libcsp
+	url = git@github.com:JoseMorenoJ/libcsp.git
