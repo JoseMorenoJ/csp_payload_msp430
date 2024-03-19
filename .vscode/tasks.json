@@ -79,6 +79,17 @@
                 "build",
             ],
             "type": "shell",
+        },
+        {
+            "label": "msp flasher",
+            "command": "C:/ti/MSPFlasher_1.3.20/MSP430Flasher.exe", // Could be any other shell command
+            "args": [
+                "-n",
+                "MSP430FR5994",
+                "-w",
+                "build/payload/csp_payload.elf",
+            ],
+            "type": "shell",
         }
     ]
 }
