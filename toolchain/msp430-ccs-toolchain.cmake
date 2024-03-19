@@ -32,9 +32,6 @@ set(CMAKE_OBJDUMP       "${PATH_MSP430_BIN}/ofd430.exe")
 set(CMAKE_STRIP         "${PATH_MSP430_BIN}/strip430.exe")
 set(MSP430_HEX_TOOL     "${PATH_MSP430_BIN}/hex430.exe")
 
-# set(CMAKE_C_COMPILER_WORKS True)
-# set(CMAKE_CXX_COMPILER_WORKS True)
-
 set(CMAKE_FIND_ROOT_PATH  "")
 
 # Common compile flags
@@ -46,6 +43,8 @@ set(CMAKE_C_FLAGS
     -I${PATH_MSP430_SUPPORT_INC} \
     -I${PATH_MSP430_INCLUDE}"
     CACHE STRING "")
+
+set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS} CACHE STRING "")
 
 # Linker flags
 set(CMAKE_EXE_LINKER_FLAGS

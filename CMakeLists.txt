@@ -11,7 +11,10 @@ message(STATUS "CMAKE_C_COMPILER='${CMAKE_C_COMPILER}'")
 set(FREERTOS_HEAP "4" CACHE STRING "FreeRTOS heap model number. 1 .. 5. Or absolute path to custom heap source file")
 set(FREERTOS_PORT "CCS_MSP430X" CACHE STRING "FreeRTOS port name")
 
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+# libcsp uses CMAKE_SYSYTEM_NAME to build the arch dependent sources
+set(CMAKE_SYSTEM_NAME FreeRTOS)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 add_compile_options(
     # --advice:power=all
@@ -25,7 +28,7 @@ add_compile_options(
     --diag_wrap=off
     --display_error_number
     --emit_warnings_as_errors
-    --c99
+    --c11
     -o2
     -g
 )
